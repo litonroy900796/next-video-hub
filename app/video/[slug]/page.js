@@ -1,6 +1,10 @@
 "use client";
 
-import { findVideoBySlug, getYouTubeEmbedURL } from "@/components/lib/utils";
+import {
+  findVideoBySlug,
+  getSimilarVideos,
+  getYouTubeEmbedURL,
+} from "@/components/lib/utils";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
 import videos from "@/data/videos.json";
@@ -11,7 +15,9 @@ const VideoPage = () => {
 
   const [showFullDesc, setShowFullDesc] = useState(false);
   const video = findVideoBySlug(videos, slug);
-  console.log("🚀 ~ VideoPage ~ video:", video);
+  const similarVideos = getSimilarVideos(videos, video, 10);
+
+  console.log("🚀 ~ VideoPage ~ video:", similarVideos);
   return (
     <main className="px-4 py-6 md:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
